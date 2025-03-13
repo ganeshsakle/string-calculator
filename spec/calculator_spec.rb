@@ -4,7 +4,7 @@ require 'rspec'
 require_relative '../calculator'
 
 RSpec.describe Calculator do
-  subject { Calculator.new.add(numbers) }
+  subject(:add) { Calculator.new.add(numbers) }
 
   let(:numbers) { '' }
 
@@ -53,6 +53,8 @@ RSpec.describe Calculator do
   context 'when number has negative digits' do
     let(:numbers) { '1,-2\n-3' }
 
-    it { is_expected.to raise_error(RuntimeError, 'negative numbers not allowed -2, -3') }
+    it 'raises an exception for negative numbers' do
+      expect { add }.to raise_error(RuntimeError, 'negative numbers not allowed -2, -3')
+    end
   end
 end
