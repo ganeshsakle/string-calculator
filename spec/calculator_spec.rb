@@ -29,4 +29,10 @@ RSpec.describe Calculator do
 
     it { is_expected.to eq 15 }
   end
+
+  context 'when number has new lines between numbers' do
+    let(:numbers) { '1\n2,3' }
+
+    it { is_expected.to eq 6 }
+  end
 end
