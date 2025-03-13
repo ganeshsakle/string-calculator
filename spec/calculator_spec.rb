@@ -69,4 +69,10 @@ RSpec.describe Calculator do
 
     it { is_expected.to eq 6 }
   end
+
+  context 'when number has multiple custom delimiters' do
+    let(:numbers) { '//[*][%]\n1*2%3' }
+
+    it { is_expected.to eq 6 }
+  end
 end
