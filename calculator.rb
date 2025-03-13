@@ -13,7 +13,6 @@ class Calculator
     delimiters.each do |delimiter|
       numbers = numbers.tr(delimiter, DEFAULT_DELIMITER)
     end
-
     numbers_array = numbers.split(DEFAULT_DELIMITER).map(&:to_i)
 
     raise_negatives_exception(numbers_array)

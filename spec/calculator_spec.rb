@@ -36,18 +36,10 @@ RSpec.describe Calculator do
     it { is_expected.to eq 6 }
   end
 
-  context 'when number has different delimiters' do
-    context 'when there is no new line character after delimiter changer' do
-      let(:numbers) { '//;\n1;2' }
+  context 'when there is a new line character after delimiter changer' do
+    let(:numbers) { '//;\n1;2' }
 
-      it { is_expected.to eq 3 }
-    end
-
-    context 'when there is a new line character after delimiter changer' do
-      let(:numbers) { '//;\n1;2' }
-
-      it { is_expected.to eq 3 }
-    end
+    it { is_expected.to eq 3 }
   end
 
   context 'when number has negative digits' do
@@ -74,5 +66,11 @@ RSpec.describe Calculator do
     let(:numbers) { '//[*][%]\n1*2%3' }
 
     it { is_expected.to eq 6 }
+  end
+
+  context 'when multiple delimiter has length more than 1' do
+    let(:numbers) { '//[*^][%&]\n1*^2%&3\n4*^5%&6' }
+
+    it { is_expected.to eq 21 }
   end
 end
