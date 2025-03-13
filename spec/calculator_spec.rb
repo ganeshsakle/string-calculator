@@ -57,4 +57,10 @@ RSpec.describe Calculator do
       expect { add }.to raise_error(RuntimeError, 'negative numbers not allowed -2, -3')
     end
   end
+
+  context 'when number has numbers bigger than 1000' do
+    let(:numbers) { '1,1001,2,1002,3' }
+
+    it { is_expected.to eq 6 }
+  end
 end
