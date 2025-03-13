@@ -49,4 +49,10 @@ RSpec.describe Calculator do
       it { is_expected.to eq 3 }
     end
   end
+
+  context 'when number has negative digits' do
+    let(:numbers) { '1,-2\n-3' }
+
+    it { is_expected.to raise_error(RuntimeError, 'negative numbers not allowed -2, -3') }
+  end
 end
