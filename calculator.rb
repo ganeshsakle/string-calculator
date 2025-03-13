@@ -4,13 +4,10 @@ class Calculator
   def add(numbers)
     return 0 if numbers.empty?
 
-    delimiter = extract_delimiter(numbers)
-    numbers = numbers.sub('//[^\n]*\n', '') if numbers.start_with?('//')
-
+    delimiter, numbers = extract_delimiter(numbers)
     numbers_array = numbers.tr('\n', delimiter).split(delimiter).map(&:to_i)
 
     raise_negatives_exception(numbers_array)
-
     ignore_big_numbers(numbers_array)
 
     numbers_array.sum
@@ -19,7 +16,19 @@ class Calculator
   private
 
   def extract_delimiter(numbers)
-    numbers.start_with?('//') ? numbers.split('\n', 2).first[-1] : ','
+    delimiter = ','
+
+    if numbers.start_with?('//')
+      delimiter_line, numbers = numbers.split('\n', 2)
+      delimiter = delimiter_line[-1]
+      closing_delimiter_index = delimiter_line.index(']')
+
+      if closing_delimiter_index
+        delimiter = delimiter_line[3...closing_delimiter_index]
+      end
+    end
+
+    [delimiter, numbers]
   end
 
   def raise_negatives_exception(numbers_array)
