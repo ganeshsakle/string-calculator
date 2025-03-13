@@ -11,6 +11,8 @@ class Calculator
 
     raise_negatives_exception(numbers_array)
 
+    ignore_big_numbers(numbers_array)
+
     numbers_array.sum
   end
 
@@ -32,5 +34,9 @@ class Calculator
     negatives = numbers_array.select(&:negative?)
 
     raise "negative numbers not allowed #{negatives.join(', ')}"
+  end
+
+  def ignore_big_numbers(numbers_array)
+    numbers_array.reject! { |num| num > 1000 }
   end
 end
