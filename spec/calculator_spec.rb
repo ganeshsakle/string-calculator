@@ -35,4 +35,18 @@ RSpec.describe Calculator do
 
     it { is_expected.to eq 6 }
   end
+
+  context 'when number has different delimiters' do
+    context 'when there is no new line character after delimiter changer' do
+      let(:numbers) { '//;\n1;2' }
+
+      it { is_expected.to eq 3 }
+    end
+
+    context 'when there is a new line character after delimiter changer' do
+      let(:numbers) { '//;\n1;2' }
+
+      it { is_expected.to eq 3 }
+    end
+  end
 end
